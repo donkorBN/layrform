@@ -1,28 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  /* HSL Colors for easier manipulation */
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
+  /* Softer, warmer palette (Typeform/Tally inspired) */
+  --background: 30 20% 98%;
+  /* Warm off-white */
+  --foreground: 240 5% 15%;
+  /* Soft charcoal */
 
-  --primary: 263.4 70% 50.4%;
-  /* Violet */
-  --primary-foreground: 210 40% 98%;
+  --primary: 260 60% 60%;
+  /* Soft Violet */
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 30 10% 94%;
+  /* Warm light gray */
+  --secondary-foreground: 240 5% 15%;
 
-  --accent: 263.4 70% 50.4%;
-  --accent-foreground: 210 40% 98%;
+  --accent: 15 80% 65%;
+  /* Soft Coral/Terra-cotta */
+  --accent-foreground: 0 0% 100%;
 
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
+  --muted: 30 10% 90%;
+  --muted-foreground: 240 4% 45%;
 
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 5% 15%;
 
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
+  --border: 30 10% 85%;
+  --input: 30 10% 96%;
 
   --radius: 0.75rem;
 }
@@ -52,12 +56,46 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  --font-serif: var(--font-serif);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 240 5% 10%;
+    /* Soft dark gray, not pitch black */
+    --foreground: 30 10% 90%;
+
+    --primary: 260 60% 70%;
+    /* Lighter violet for dark mode */
+    --primary-foreground: 240 5% 10%;
+
+    --secondary: 240 5% 15%;
+    --secondary-foreground: 30 10% 90%;
+
+    --card: 240 5% 13%;
+    --card-foreground: 30 10% 90%;
+
+    --border: 240 5% 20%;
+    --input: 240 5% 15%;
+  }
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  line-height: 1.6;
+  /* Relaxed line height */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
 }
 
 /* Smooth scrolling */
@@ -65,16 +103,20 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Glassmorphism utilities */
+/* Minimal utilities */
 .glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.glass-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+.soft-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }

@@ -1,44 +1,70 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+function cn(...inputs: (string | undefined | null | false)[]) {
+    return twMerge(clsx(inputs));
+}
+
 export default function Features() {
     const features = [
         {
-            title: "Voice Filling",
-            description: "Users just speak. We transcribe and extract structured data in real-time.",
+            title: "Create by speaking",
+            description: "Just describe the form you need, and we'll build it instantly. No drag-and-drop, no complex menus. Just your voice.",
+            icon: "🗣️",
+            className: "md:col-span-2",
+        },
+        {
+            title: "Fill by speaking",
+            description: "Your users can answer naturally. No typing required.",
             icon: "🎤",
+            className: "md:col-span-1",
         },
         {
-            title: "AI Creation",
-            description: "Describe your form in plain English, and we'll build the schema for you.",
-            icon: "✨",
-        },
-        {
-            title: "Dynamic Logic",
-            description: "Smart branching that adapts based on what the user says.",
-            icon: "🔀",
-        },
-        {
-            title: "Real-time UI",
-            description: "Watch fields fill up instantly as you speak. Magic in action.",
+            title: "Real-time updates",
+            description: "Watch the form fill itself as you speak. It feels like magic.",
             icon: "⚡",
+            className: "md:col-span-1",
+        },
+        {
+            title: "Clean data",
+            description: "Get structured, perfect answers that you can edit before submitting. We handle the messy part of transcription for you.",
+            icon: "✨",
+            className: "md:col-span-2",
         },
     ];
 
     return (
-        <section className="py-24 relative">
+        <section className="py-20 bg-secondary/30">
             <div className="container mx-auto px-4">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything you need</h2>
-                    <p className="text-muted-foreground text-lg">Powerful features for the next generation of data collection.</p>
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif">Forms that feel like conversations.</h2>
+                    <p className="text-muted-foreground text-xl max-w-2xl mx-auto">
+                        It removes 95% of the friction in form filling.
+                    </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                     {features.map((feature, index) => (
-                        <div key={index} className="glass-card p-6 rounded-2xl hover:bg-white/5 transition-colors group">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
-                            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                            <p className="text-muted-foreground leading-relaxed">
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className={cn(
+                                "bg-card p-10 rounded-3xl soft-card hover:shadow-lg transition-all duration-300 group",
+                                feature.className
+                            )}
+                        >
+                            <div className="text-5xl mb-8 group-hover:scale-110 transition-transform duration-300 inline-block">{feature.icon}</div>
+                            <h3 className="text-2xl font-bold mb-4 font-serif">{feature.title}</h3>
+                            <p className="text-muted-foreground leading-relaxed text-lg">
                                 {feature.description}
                             </p>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
