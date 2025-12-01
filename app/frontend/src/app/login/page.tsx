@@ -1,8 +1,18 @@
 import { login, signup } from '@/app/actions/auth'
+import AuthErrorModal from '@/components/auth/AuthErrorModal'
+import { Suspense } from 'react'
 
-export default function LoginPage() {
+export default function LoginPage({
+    searchParams,
+}: {
+    searchParams: { message?: string }
+}) {
     return (
         <div className="min-h-screen flex items-center justify-center bg-background px-4">
+            <Suspense>
+                <AuthErrorModal />
+            </Suspense>
+
             <div className="w-full max-w-md space-y-8">
                 <div className="text-center">
                     <h2 className="mt-6 text-3xl font-bold tracking-tight text-foreground font-serif">
@@ -15,6 +25,13 @@ export default function LoginPage() {
                         </a>
                     </p>
                 </div>
+
+                {searchParams?.message && (
+                    <div className="bg-green-500/10 border border-green-500/20 text-green-500 px-4 py-3 rounded-lg text-sm text-center">
+                        {searchParams.message}
+                    </div>
+                )}
+
                 <form className="mt-8 space-y-6">
                     <div className="-space-y-px rounded-md shadow-sm">
                         <div>

@@ -17,11 +17,12 @@ export async function login(formData: FormData) {
     })
 
     if (error) {
-        redirect('/login?error=Could not authenticate user')
+        console.error('Login error:', error)
+        redirect('/login?error=' + encodeURIComponent(error.message))
     }
 
     revalidatePath('/', 'layout')
-    redirect('/')
+    redirect('/dashboard')
 }
 
 export async function signup(formData: FormData) {
@@ -36,11 +37,12 @@ export async function signup(formData: FormData) {
     })
 
     if (error) {
-        redirect('/login?error=Could not create user')
+        console.error('Signup error:', error)
+        redirect('/login?error=' + encodeURIComponent(error.message))
     }
 
     revalidatePath('/', 'layout')
-    redirect('/')
+    redirect('/login?message=Check your email to confirm your account')
 }
 
 export async function signout() {
