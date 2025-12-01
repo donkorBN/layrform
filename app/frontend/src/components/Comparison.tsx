@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Keyboard, AlertCircle, Frown, TrendingDown, Mic, MessageCircle, Smile, TrendingUp } from "lucide-react";
 
 export default function Comparison() {
     return (
@@ -19,19 +20,19 @@ export default function Comparison() {
                         <h3 className="text-2xl font-bold mb-8 text-muted-foreground font-serif">Traditional Forms</h3>
                         <ul className="space-y-6">
                             <li className="flex items-center gap-4 text-muted-foreground">
-                                <span className="text-2xl">⌨️</span>
+                                <Keyboard className="w-6 h-6" />
                                 <span>Tedious typing on mobile</span>
                             </li>
                             <li className="flex items-center gap-4 text-muted-foreground">
-                                <span className="text-2xl">🛑</span>
+                                <AlertCircle className="w-6 h-6" />
                                 <span>Rigid, linear flow</span>
                             </li>
                             <li className="flex items-center gap-4 text-muted-foreground">
-                                <span className="text-2xl">😓</span>
+                                <Frown className="w-6 h-6" />
                                 <span>Feels like homework</span>
                             </li>
                             <li className="flex items-center gap-4 text-muted-foreground">
-                                <span className="text-2xl">📉</span>
+                                <TrendingDown className="w-6 h-6" />
                                 <span>High drop-off rates</span>
                             </li>
                         </ul>
@@ -50,19 +51,19 @@ export default function Comparison() {
                         <h3 className="text-2xl font-bold mb-8 text-foreground font-serif">LAYR Forms</h3>
                         <ul className="space-y-6">
                             <li className="flex items-center gap-4">
-                                <span className="text-2xl">🗣️</span>
+                                <Mic className="w-6 h-6 text-primary" />
                                 <span className="font-medium">Just speak naturally</span>
                             </li>
                             <li className="flex items-center gap-4">
-                                <span className="text-2xl">🌊</span>
+                                <MessageCircle className="w-6 h-6 text-primary" />
                                 <span className="font-medium">Fluid, conversational flow</span>
                             </li>
                             <li className="flex items-center gap-4">
-                                <span className="text-2xl">😌</span>
+                                <Smile className="w-6 h-6 text-primary" />
                                 <span className="font-medium">Feels like a chat</span>
                             </li>
                             <li className="flex items-center gap-4">
-                                <span className="text-2xl">🚀</span>
+                                <TrendingUp className="w-6 h-6 text-primary" />
                                 <span className="font-medium">Higher completion rates</span>
                             </li>
                         </ul>

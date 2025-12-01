@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Mic, Sparkles, Zap, FileCheck } from "lucide-react";
 
 function cn(...inputs: (string | undefined | null | false)[]) {
     return twMerge(clsx(inputs));
@@ -13,25 +14,25 @@ export default function Features() {
         {
             title: "Create by speaking",
             description: "Just describe the form you need, and we'll build it instantly. No drag-and-drop, no complex menus. Just your voice.",
-            icon: "🗣️",
+            icon: <Mic className="w-12 h-12 text-primary" />,
             className: "md:col-span-2",
         },
         {
             title: "Fill by speaking",
             description: "Your users can answer naturally. No typing required.",
-            icon: "🎤",
+            icon: <Sparkles className="w-12 h-12 text-primary" />,
             className: "md:col-span-1",
         },
         {
             title: "Real-time updates",
             description: "Watch the form fill itself as you speak. It feels like magic.",
-            icon: "⚡",
+            icon: <Zap className="w-12 h-12 text-primary" />,
             className: "md:col-span-1",
         },
         {
             title: "Clean data",
             description: "Get structured, perfect answers that you can edit before submitting. We handle the messy part of transcription for you.",
-            icon: "✨",
+            icon: <FileCheck className="w-12 h-12 text-primary" />,
             className: "md:col-span-2",
         },
     ];
@@ -59,7 +60,7 @@ export default function Features() {
                                 feature.className
                             )}
                         >
-                            <div className="text-5xl mb-8 group-hover:scale-110 transition-transform duration-300 inline-block">{feature.icon}</div>
+                            <div className="mb-8 group-hover:scale-110 transition-transform duration-300 inline-block">{feature.icon}</div>
                             <h3 className="text-2xl font-bold mb-4 font-serif">{feature.title}</h3>
                             <p className="text-muted-foreground leading-relaxed text-lg">
                                 {feature.description}

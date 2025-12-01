@@ -1,28 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Stethoscope, HardHat, MessageSquare, Calendar } from "lucide-react";
 
 export default function UseCases() {
     const cases = [
         {
             title: "Patient Intake",
             description: "Doctors and nurses can dictate notes directly into structured forms during rounds.",
-            tag: "Healthcare"
+            tag: "Healthcare",
+            icon: <Stethoscope className="w-6 h-6 mb-4 text-primary" />
         },
         {
             title: "Field Reports",
             description: "Technicians can file incident reports hands-free while inspecting equipment.",
-            tag: "Operations"
+            tag: "Operations",
+            icon: <HardHat className="w-6 h-6 mb-4 text-primary" />
         },
         {
             title: "Client Feedback",
             description: "Capture authentic, detailed feedback by letting customers speak their mind.",
-            tag: "Marketing"
+            tag: "Marketing",
+            icon: <MessageSquare className="w-6 h-6 mb-4 text-primary" />
         },
         {
             title: "Event Registration",
             description: "Speed up check-ins by simply asking attendees for their details.",
-            tag: "Events"
+            tag: "Events",
+            icon: <Calendar className="w-6 h-6 mb-4 text-primary" />
         }
     ];
 
@@ -44,9 +49,12 @@ export default function UseCases() {
                             transition={{ delay: index * 0.1 }}
                             className="group p-8 rounded-3xl border border-border bg-card hover:border-primary/50 transition-colors cursor-default"
                         >
-                            <span className="inline-block px-3 py-1 rounded-full bg-secondary text-xs font-medium mb-4 text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                                {item.tag}
-                            </span>
+                            <div className="flex justify-between items-start">
+                                <span className="inline-block px-3 py-1 rounded-full bg-secondary text-xs font-medium mb-4 text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                                    {item.tag}
+                                </span>
+                                {item.icon}
+                            </div>
                             <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                             <p className="text-muted-foreground">
                                 {item.description}

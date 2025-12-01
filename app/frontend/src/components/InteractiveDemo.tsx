@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Mic, FileText } from "lucide-react";
 
 export default function InteractiveDemo() {
     const [step, setStep] = useState(0);
@@ -27,7 +28,7 @@ export default function InteractiveDemo() {
                         <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full" />
                         <div className="relative bg-card p-8 rounded-3xl shadow-sm border border-border/50 min-h-[300px] flex flex-col justify-center">
                             <div className="flex items-center gap-3 mb-6 text-muted-foreground text-sm uppercase tracking-wider font-medium">
-                                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                                <Mic className="w-4 h-4 text-red-500 animate-pulse" />
                                 Live Transcript
                             </div>
                             <motion.div
@@ -49,7 +50,7 @@ export default function InteractiveDemo() {
                     <div className="relative">
                         <div className="bg-card p-8 rounded-3xl shadow-lg border border-border/50 min-h-[300px] flex flex-col gap-4">
                             <div className="flex items-center gap-3 mb-2 text-muted-foreground text-sm uppercase tracking-wider font-medium">
-                                <span className="w-2 h-2 rounded-full bg-green-500" />
+                                <FileText className="w-4 h-4 text-green-500" />
                                 Extracted Data
                             </div>
 
