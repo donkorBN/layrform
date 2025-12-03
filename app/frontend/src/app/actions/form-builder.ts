@@ -1,13 +1,19 @@
 'use server'
 
+import fs from 'fs'
+import path from 'path'
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { generateObject } from 'ai'
-import { openai } from '@ai-sdk/openai'
+import { google } from '@ai-sdk/google'
 import { z } from 'zod'
 
 export async function generateForm(prompt: string) {
     const supabase = await createClient()
+
+    // Debug logging to file
+    const logPath = path.join(process.cwd(), 'debug.log')
+    const log = (msg: string) => fs.appendFileSync(logPath, new Date().toISOString() + ': ' + msg + '\n')
 
     if (!supabase) {
         throw new Error('Supabase client not initialized')
@@ -33,14 +39,21 @@ export async function generateForm(prompt: string) {
         }))
     })
 
+    // Debug logging
+    log(`Generating form with prompt: ${prompt}`)
+    log(`Has Google Key: ${!!process.env.GOOGLE_GENERATIVE_AI_API_KEY}`)
+
     try {
         const { object: formStructure } = await generateObject({
-            model: openai('gpt-4o-mini'),
+            model: google('gemini-1.5-flash'),
             schema: formSchema,
             prompt: `Create a form based on this description: "${prompt}". 
       Ensure the fields are relevant and cover all necessary information implied by the description.
       Use professional language.`
         })
+
+        log('Success! Generated structure.')
+        console.log('AI generated structure:', JSON.stringify(formStructure, null, 2))
 
         // Insert the new form
         const { data, error } = await supabase
@@ -56,16 +69,20 @@ export async function generateForm(prompt: string) {
             .single()
 
         if (error) {
-            console.error('Error creating form:', error)
-            throw new Error('Failed to create form')
+            console.error('Supabase Insert Error:', error)
+            throw new Error('Failed to save form to database: ' + error.message)
         }
 
-        // In the future, we might redirect to the form editor
-        // For now, back to dashboard to see the new form
         redirect('/dashboard')
 
-    } catch (error) {
-        console.error('AI Generation Error:', error)
-        throw new Error('Failed to generate form. Please try again.')
+    } catch (error: any) {
+        log(`ERROR: ${error.message}`)
+        log(`Full Error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`)
+
+        console.error('Full Error Details:', error)
+        if (error.message.includes('API key')) {
+            throw new Error('Invalid Google API Key. Please check your .env.local file.')
+        }
+        throw new Error(`Failed to generate form: ${error.message}`)
     }
 }
